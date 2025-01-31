@@ -1,0 +1,3 @@
+# GameVault
+
+GameVault is a web application built to learn Angular fundamentals by exploring a rich video game dataset. The project integrates an Angular frontend with a Flask backend and SQLite3 database, providing a hands-on experience in full-stack development. Users can browse, search, and filter through a collection of video games, view detailed information about each game, and explore sales and rating data.
