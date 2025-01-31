@@ -45,6 +45,7 @@ python app.py
 
 The server will start on `http://localhost:5000` in debug mode.
 
+
 ## API Endpoints
 
 ### 1. Home
@@ -82,6 +83,40 @@ The server will start on `http://localhost:5000` in debug mode.
 - **Description:** Retrieves a specific game by its ID
 - **Response:** Single game object
 - **Example:** `/games/1`
+
+### 5. Filter Games
+- **URL:** `/games/filter`
+- **Method:** `GET`
+- **Parameters:**
+  - `name` (optional): Filter by game name (partial match)
+  - `year` (optional): Filter by release year (exact match)
+  - `genre` (optional): Filter by genre (exact match)
+  - `platform` (optional): Filter by platform (partial match)
+  - `rating` (optional): Filter by rating (exact match)
+- **Description:** Retrieves games matching the specified filters
+- **Response:** Array of game objects matching all specified criteria
+- **Example:** `/games/filter?genre=Action&year=2018&rating=M`
+
+### 6. Get All Genres
+- **URL:** `/genres`
+- **Method:** `GET`
+- **Description:** Retrieves list of all unique genres in the database
+- **Response:** Array of genre strings
+- **Example Response:** `["Action", "Adventure", "Sports", "RPG", ...]`
+
+### 7. Get All Platforms
+- **URL:** `/platforms`
+- **Method:** `GET`
+- **Description:** Retrieves list of all unique platforms in the database
+- **Response:** Array of platform strings
+- **Example Response:** `["PS4", "Xbox One", "PC", "Switch", ...]`
+
+### 8. Get All Ratings
+- **URL:** `/ratings`
+- **Method:** `GET`
+- **Description:** Retrieves list of all unique game ratings in the database
+- **Response:** Array of rating strings
+- **Example Response:** `["E", "T", "M", "E10+", ...]`
 
 ## Response Format
 Game objects are returned in JSON format with all fields from the database schema.
