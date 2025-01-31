@@ -55,5 +55,69 @@ def get_game(id):
     conn.close()
     return jsonify(dict(game))
 
+@app.route('/games/filter', methods=['GET'])
+def filter_games():
+    name = request.args.get('name', default=None, type=str) #
+    year = request.args.get('year', default=None, type=int)
+    genre = request.args.get('genre', default=None, type=str) #
+    platform = request.args.get('platform', default=None, type=str)
+    rating = request.args.get('rating', default=None, type=str) # 
+
+    query = 'SELECT * FROM games WHERE 1=1'
+    params = []
+
+    if name:
+        query += ' AND Name LIKE ?'
+        params.append(f'%{name}%')
+    if year:
+        query += ' AND Year_of_Release = ?'
+        params.append(year)
+    if genre:
+        query += ' AND Genre = ?'
+        params.append(genre)
+    if platform:
+        query += ' AND Platform LIKE ?'
+        params.append(f'%{platform}%')
+    if rating:
+        query += ' AND Rating = ?'
+        params.append(rating)
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute(query, params)
+    games = cursor.fetchall()
+    conn.close()
+
+    return jsonify([dict(game) for game in games])
+
+
+@app.route('/genres', methods=['GET'])
+def get_genres():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT DISTINCT Genre FROM games')
+    genres = cursor.fetchall()
+    conn.close()
+    return jsonify([genre[0] for genre in genres])
+
+@app.route('/platforms', methods=['GET'])
+def get_platforms():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT DISTINCT Platform FROM games')
+    platforms = cursor.fetchall()
+    conn.close()
+    return jsonify([platform[0] for platform in platforms])
+
+@app.route('/ratings', methods=['GET'])
+def get_ratings():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute('SELECT DISTINCT Rating FROM games')
+    ratings = cursor.fetchall()
+    conn.close()
+    return jsonify([rating[0] for rating in ratings])
+
+
 if __name__ == '__main__':
     app.run(debug=True)
