@@ -14,14 +14,37 @@ def get_db_connection():
 def home():
     return "Welcome to the Video Game API!"
 
-@app.route('/games', methods=['GET'])
-def get_games():
+@app.route('/allgames', methods=['GET'])
+def get_all_games():
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute('SELECT * FROM games')
     games = cursor.fetchall()
     conn.close()
     return jsonify([dict(game) for game in games])
+
+@app.route('/games', methods=['GET'])
+def get_games():
+    limit = request.args.get('limit', default=50, type=int)  
+    offset = request.args.get('offset', default=0, type=int) 
+
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT * FROM games LIMIT ? OFFSET ?', (limit, offset))
+    games = cursor.fetchall()
+
+    cursor.execute('SELECT COUNT(*) FROM games')
+    total_games = cursor.fetchone()[0]
+
+    conn.close()
+
+    return jsonify({
+        'games': [dict(game) for game in games],
+        'total': total_games,
+        'limit': limit,
+        'offset': offset
+    })
 
 @app.route('/games/<int:id>', methods=['GET'])
 def get_game(id):
@@ -31,7 +54,6 @@ def get_game(id):
     game = cursor.fetchone()
     conn.close()
     return jsonify(dict(game))
-
 
 if __name__ == '__main__':
     app.run(debug=True)
