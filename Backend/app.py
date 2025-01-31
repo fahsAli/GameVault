@@ -57,11 +57,11 @@ def get_game(id):
 
 @app.route('/games/filter', methods=['GET'])
 def filter_games():
-    name = request.args.get('name', default=None, type=str) #
+    name = request.args.get('name', default=None, type=str) 
     year = request.args.get('year', default=None, type=int)
-    genre = request.args.get('genre', default=None, type=str) #
+    genre = request.args.get('genre', default=None, type=str) 
     platform = request.args.get('platform', default=None, type=str)
-    rating = request.args.get('rating', default=None, type=str) # 
+    rating = request.args.get('rating', default=None, type=str) 
 
     query = 'SELECT * FROM games WHERE 1=1'
     params = []
