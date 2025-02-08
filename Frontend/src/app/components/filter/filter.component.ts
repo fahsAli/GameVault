@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { GenreService } from '../../services/genre.service';
 import { Genre } from '../../interfaces/genre.interface';
+import { PlatformService } from '../../services/platform.service';
+import { Platform } from '../../interfaces/platform.interface';
 
 @Component({
   selector: 'app-filter',
@@ -12,6 +14,9 @@ export class FilterComponent {
   private genreService = inject(GenreService);
   genres: Genre[] = [];
 
+  private platformService = inject(PlatformService);
+  platforms: Platform[] = [];
+
   constructor() {
     this.genreService.getGenres().subscribe({
       next: (data) => {
@@ -20,5 +25,14 @@ export class FilterComponent {
       },
       error: (err) => console.error("Error fetching genres:", err)
     });
+
+    this.platformService.getPlatforms().subscribe({
+      next: (data) => {
+        this.platforms = data;
+        console.log("Platforms loaded:", this.platforms);
+      },
+      error: (err) => console.error("Error fetching platforms:", err)
+    });
+
   }
 }
