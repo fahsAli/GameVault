@@ -7,7 +7,6 @@ import { Platform } from '../interfaces/platform.interface';
 })
 export class PlatformService {
   private http = inject(HttpClient);
-  private users = signal<Platform[]>([])
   readonly url = 'http://127.0.0.1:5000/platforms';
 
   constructor() { }
