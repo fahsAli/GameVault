@@ -2,26 +2,26 @@
     <h2>Search games</h2>
 
     <div id="name-container">
-        <input class="form-control" id="game_input" placeholder="Game name">
-        <button type="button" class="btn btn-secondary">search</button>
+        <input class="form-control" id="game_input" placeholder="Game name" [(ngModel)]="gameName">
+        <button type="button" class="btn btn-secondary" (click)="onSearch()">search</button>
     </div>
 
     <div id="g-p-r-container">
-        <input class="form-control" list="genrelistOptions" id="genre-list" placeholder="Genre">
+        <input class="form-control" list="genrelistOptions" id="genre-list" placeholder="Genre" [(ngModel)]="genre">
         <datalist id="genrelistOptions">
             @for (genre of genres; track $index) {
                 <option value="{{genre}}">
             }
         </datalist>
 
-        <input class="form-control" list="platformlistOptions" id="platform-list" placeholder="platform">
+        <input class="form-control" list="platformlistOptions" id="platform-list" placeholder="platform" [(ngModel)]="platform">
         <datalist id="platformlistOptions">
             @for (platform of platforms; track $index) {
                 <option value="{{platform}}">
             }
         </datalist>
 
-        <input class="form-control" list="ratinglistOptions" id="rating-list" placeholder="rating">
+        <input class="form-control" list="ratinglistOptions" id="rating-list" placeholder="rating" [(ngModel)]="rating">
         <datalist id="ratinglistOptions">
             @for (rating of ratings; track $index) {
                 <option value="{{rating}}">
