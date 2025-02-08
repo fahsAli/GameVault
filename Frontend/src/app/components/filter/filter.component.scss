@@ -1,0 +1,44 @@
+
+#filter-container {
+    width: 100%;
+    height: auto;
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #b90000;
+
+}
+
+#filter-container h2 {
+    color: #ececec;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#name-container {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+#name-container button {
+    width: 20%;
+    margin-left: 10px;
+}
+
+#g-p-r-container {
+    width: 100%;
+    display: flex;
+}
+
+#genre-list {
+    margin: 2.5px;
+}
+
+#platform-list {
+    margin: 2.5px;
+}
+
+#rating-list {
+    margin: 2.5px;
+}
+

@@ -1,2 +1,31 @@
+<div id="filter-container">
+    <h2>Search games</h2>
 
+    <div id="name-container">
+        <input class="form-control" id="game_input" placeholder="Game name">
+        <button type="button" class="btn btn-secondary">search</button>
+    </div>
 
+    <div id="g-p-r-container">
+        <input class="form-control" list="genrelistOptions" id="genre-list" placeholder="Genre">
+        <datalist id="genrelistOptions">
+            @for (genre of genres; track $index) {
+                <option value="{{genre}}">
+            }
+        </datalist>
+
+        <input class="form-control" list="platformlistOptions" id="platform-list" placeholder="platform">
+        <datalist id="platformlistOptions">
+            @for (platform of platforms; track $index) {
+                <option value="{{platform}}">
+            }
+        </datalist>
+
+        <input class="form-control" list="ratinglistOptions" id="rating-list" placeholder="rating">
+        <datalist id="ratinglistOptions">
+            @for (rating of ratings; track $index) {
+                <option value="{{rating}}">
+            }
+        </datalist>
+    </div>
+</div>
