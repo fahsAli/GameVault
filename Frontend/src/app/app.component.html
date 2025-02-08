@@ -2,5 +2,5 @@
 <app-navbar></app-navbar>
 
 <div id="filter">
-    <app-filter></app-filter>
+    <app-filter (filterChange)="onSearch($event)"></app-filter>
 </div>
